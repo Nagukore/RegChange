@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-navy-950 text-slate-200 antialiased;
+    /* Very low-contrast depth so large dark surfaces do not read as flat. */
+    background-image:
+      radial-gradient(900px 500px at 12% -8%, rgba(59, 130, 246, 0.08), transparent 60%),
+      radial-gradient(700px 420px at 100% 0%, rgba(14, 165, 233, 0.055), transparent 62%);
+    background-attachment: fixed;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  }
+
+  /* Tabular figures keep numeric columns aligned down a table. */
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-2 w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-navy-700;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-600;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent/70 ring-offset-2 ring-offset-navy-950;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-white/[.07] bg-navy-900/70 shadow-card backdrop-blur-sm;
+  }
+
+  .card-head {
+    @apply flex items-center justify-between gap-3 border-b border-white/[.06] px-5 py-3.5;
+  }
+
+  .card-title {
+    @apply text-[13px] font-semibold uppercase tracking-[.09em] text-slate-400;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium
+           transition-colors disabled:cursor-not-allowed disabled:opacity-45;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-deep;
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/[.03] text-slate-300 hover:bg-white/[.07];
+  }
+  .btn-danger {
+    @apply btn border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20;
+  }
+  .btn-success {
+    @apply btn border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] font-semibold
+           uppercase tracking-wide;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-white/10 bg-navy-950/70 px-3 py-2 text-sm text-slate-200
+           placeholder:text-slate-500 focus:border-accent/60;
+  }
+
+  .table-wrap {
+    @apply overflow-x-auto;
+  }
+  .tbl {
+    @apply w-full border-collapse text-left text-sm;
+  }
+  .tbl thead th {
+    @apply sticky top-0 z-10 whitespace-nowrap border-b border-white/[.08] bg-navy-850/95 px-4 py-2.5
+           text-[11px] font-semibold uppercase tracking-[.08em] text-slate-400 backdrop-blur;
+  }
+  .tbl tbody td {
+    @apply border-b border-white/[.04] px-4 py-3 align-top text-slate-300;
+  }
+  .tbl tbody tr:hover {
+    @apply bg-white/[.025];
+  }
+
+  .mono {
+    @apply font-mono text-[12px];
+  }
+
+  /* Verbatim regulatory text: visually distinct so a quote is never mistaken
+     for our own prose. */
+  .quote {
+    @apply border-l-2 border-accent/50 bg-accent/[.06] px-3 py-2 font-mono text-[12px]
+           leading-relaxed text-slate-300;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded bg-white/[.06];
+  }
+}

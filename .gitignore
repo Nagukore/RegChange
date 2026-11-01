@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Env / secrets  -- NEVER commit real keys
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Databases
+*.db
+*.sqlite3
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# Evidence & artifacts (regenerated per run)
+backend/evidence/**
+!backend/evidence/.gitkeep
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

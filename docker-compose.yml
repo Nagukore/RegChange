@@ -1,0 +1,29 @@
+# Local PostgreSQL for development, as an alternative to Supabase.
+#
+#   docker compose up -d
+#   # then in backend/.env:
+#   DATABASE_URL=postgresql://regchange:regchange@localhost:5432/regchange
+#   cd backend && ./.venv/Scripts/python.exe -m alembic upgrade head
+#
+# Supabase remains the deployment target; this exists so the Postgres-specific
+# column types (native uuid, JSONB) can be exercised locally.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: regchange-postgres
+    environment:
+      POSTGRES_USER: regchange
+      POSTGRES_PASSWORD: regchange
+      POSTGRES_DB: regchange
+    ports:
+      - "5432:5432"
+    volumes:
+      - regchange-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U regchange -d regchange"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  regchange-pgdata:
